@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const router = express.Router();
 const logger = require('morgan');
 const port = 3000;
 
@@ -9,14 +10,15 @@ app.use(express.urlencoded({
   extended: true
 }));
 
-app.post('/sayHello', (req, res) => {
+router.post('/menu', (req, res) => {
   const responseBody = {
     version: "2.0",
     template: {
       outputs: [
         {
           simpleText: {
-            text: "hello I'm Ryan"
+            'name': '아메리카노',
+            'money': '4,500원'
           }
         }
       ]
@@ -26,26 +28,6 @@ app.post('/sayHello', (req, res) => {
   res.status(200).send(responseBody);
 });
 
-app.post('/showHello', (req, res) => {
-    console.log(req.body);
-  
-    const responseBody = {
-      version: "2.0",
-      template: {
-        outputs: [
-          {
-            simpleImage: {
-              imageUrl: "https://t1.daumcdn.net/friends/prod/category/M001_friends_ryan2.jpg",
-              altText: "hello I'm Ryan"
-            }
-          }
-        ]
-      }
-    };
-  
-    res.status(200).send(responseBody);
-  });
-  
-  app.listen(port, () => {
-    console.log(`Example skill server listening on ${port}!`);
-  });
+app.listen(port, () => {
+  console.log(`Example skill server listening on ${port}!`);
+});
