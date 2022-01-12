@@ -27,7 +27,7 @@ router.post('/menu', (req, res) => {
 
   res.status(200).send(responseBody);
 });
-
+  
 app.listen(port, () => {
   console.log(`Example skill server listening on ${port}!`);
 });
