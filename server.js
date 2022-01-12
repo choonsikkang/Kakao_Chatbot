@@ -9,10 +9,6 @@ app.use(express.urlencoded({
   extended: true
 }));
 
-app.use('/', (req, res) => {
-    res.send('Hello World!')
-});
-
 app.post('/sayHello', (req, res) => {
   const responseBody = {
     version: "2.0",
