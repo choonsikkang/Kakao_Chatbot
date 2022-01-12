@@ -1,36 +1,55 @@
 const express = require('express');
 const app = express();
+const logger = require('morgan');
+const port = 3000;
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+app.use(express.json())
+app.use(logger('dev', {}));
+app.use(express.urlencoded({
+  extended: true
+}));
 
-app.get('/keyboard', (req, res) => {
-  const data = {'type': 'text'}
-  res.json(data);
+app.use('/', (req, res) => {
+    res.send('Hello World!')
 });
 
-app.post('/message', (req, res) => {
-  const question = req.body.userRequest.utterance;
-  const goMain = '처음으로';
-  
-  if (question === '테스트') {
-    const data = {
-      'version': '2.0',
-      'template': {
-	    'outputs': [{
-	      'simpleText': {
-	        'text': '테스트'
-	      }
-	    }],
-	    'quickReplies': [{
-	      'label': goMain,
-	      'action': 'message',
-	      'messageText': goMain
-	    }]
-      }
+app.post('/sayHello', (req, res) => {
+  const responseBody = {
+    version: "2.0",
+    template: {
+      outputs: [
+        {
+          simpleText: {
+            text: "hello I'm Ryan"
+          }
+        }
+      ]
     }
-  }
-  res.json(data);
+  };
+
+  res.status(200).send(responseBody);
 });
 
-app.listen(3000, () => console.log('node on 3000'));
+app.post('/showHello', (req, res) => {
+    console.log(req.body);
+  
+    const responseBody = {
+      version: "2.0",
+      template: {
+        outputs: [
+          {
+            simpleImage: {
+              imageUrl: "https://t1.daumcdn.net/friends/prod/category/M001_friends_ryan2.jpg",
+              altText: "hello I'm Ryan"
+            }
+          }
+        ]
+      }
+    };
+  
+    res.status(200).send(responseBody);
+  });
+  
+  app.listen(port, () => {
+    console.log(`Example skill server listening on ${port}!`);
+  });
