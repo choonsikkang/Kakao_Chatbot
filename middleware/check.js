@@ -23,6 +23,7 @@ exports.isKakao = (req, res, next) => {
     /* TODO 사용자의 intentId, userId, text가 담긴 데이터를 가공 */
     res.locals.kakao = {
         intentId: req.body.intent.id,
+        action: req.body.action.params.coffee_name,
         userId: req.body.userRequest.user.id,
         text: req.body.userRequest.utterance
     };
