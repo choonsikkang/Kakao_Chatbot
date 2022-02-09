@@ -1,10 +1,13 @@
 const { inspect } = require("util");
-const { basket, sequelize } = require("../models");
+const { basket } = require("../models");
 
 exports.postCoffee = async (req, res, next) => {
     const kakao = res.locals.kakao;
 
-    const box = await basket
+    console.log(kakao.action);
+    console.log("kakao log==================================");
+
+    let box = await basket
         .create({
             name: req.body.action.detailParams.coffee_name.value, // 사용자의 발화를 디비에 저장하는 것이 옳은것인지?
             amount: req.body.action.detailParams.CupCount.origin
@@ -29,14 +32,13 @@ exports.postCoffee = async (req, res, next) => {
     let menu = await basket
         .findAll({
             where: {},
-            attrbutes: [[sequelize.fn("COUNT", sequelize.col("amount"))]],
+            // attrbutes: [[sequelize.fn("COUNT", sequelize.col("amount"))]],
             name: kakao.name,
             amount: kakao.amount
         })
         .then((res) => {
-            console.log(res);
+            console.log("조회 성공: ", res);
             return res.map((m) => {
-                console.log(m.dataValues);
                 return m.dataValues;
             });
         });
