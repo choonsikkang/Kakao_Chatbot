@@ -15,17 +15,17 @@ exports.postCoffee = async (req, res, next) => {
                 amount: req.body.action.detailParams.CupCount.origin
             })
             .catch((err) => {
-                console.error(err);
-                // console.log(err.name);
-                // console.log(err.message);
-                // console.log(err.stack);
-                if (err instanceof SequelizeUniqueConstraintError) {
-                    console.log(e.name + ", " + e.message);
-                }
-
-                if (err instanceof ER_DUP_ENTRY) {
-                    console.log(e.name + ", " + e.message);
-                }
+                console.log("나 보이니?");
+                // console.error(err);
+                // // console.log(err.name);
+                // // console.log(err.message);
+                // // console.log(err.stack);
+                // if (err instanceof SequelizeUniqueConstraintError) {
+                //     console.log(e.name + ", " + e.message);
+                // }
+                // if (err instanceof ER_DUP_ENTRY) {
+                //     console.log(e.name + ", " + e.message);
+                // }
             });
 
         if (!box) {
