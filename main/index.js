@@ -49,10 +49,12 @@ router.post("/order", isKakao, postCoffee, async (req, res) => {
     // console.log(`groupedPeople : ${JSON.stringify(groupedPeople)}`);
 
     /* NOTE 객체 값을 보여주기 위한 로직을 만들어야 된다. */
+    let text = "";
     for (category in arr) {
         var obj = arr[category];
         var result = obj.name + " " + ">" + " " + obj.amount;
         console.log(obj);
+        text += obj.name + " " + ">" + " " + obj.amount + "\n";
     }
 
     /* NOTE map함수를 리터럴 함수에 사용하지않고, 값을 가져왔음 */
@@ -75,7 +77,7 @@ router.post("/order", isKakao, postCoffee, async (req, res) => {
             "outputs": [
                 {
                     "simpleText": {
-                        "text": `++장바구니++\n------------------------------------\n${result} \n`
+                        "text": `++장바구니++\n------------------------------------\n${text}`
                     }
                 }
             ],
