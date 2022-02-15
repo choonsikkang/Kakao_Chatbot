@@ -20,6 +20,10 @@ exports.updateCoffee = async (req, res, next) => {
             console.log(err);
         });
 
+    if (!update_basket) {
+        return res.status(500);
+    }
+
     let menu = await basket
         .findAll({
             attributes: ["name", "amount"],
@@ -37,6 +41,29 @@ exports.updateCoffee = async (req, res, next) => {
 
     res.locals.menu = menu;
 
+    /* NOTE 객체 값을 보여주기 위한 로직을 만들어야 된다. */
+    let arr = res.locals.menu;
+    let text = "";
+    for (category in arr) {
+        var obj = arr[category];
+        console.log(obj);
+        text += obj.name + " " + ">" + " " + obj.amount + "\n";
+    }
+
+    const responseBody = {
+        "version": "2.0",
+        "template": {
+            "outputs": [
+                {
+                    "simpleText": {
+                        "text": `++장바구니++\n-----------------------------\n${text}`
+                    }
+                }
+            ]
+        }
+    };
+    res.status(200).send(responseBody);
+
     console.log(`update_basket : ${inspect(update_basket)}`);
-    next();
+    // next();
 };
