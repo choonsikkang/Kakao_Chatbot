@@ -25,6 +25,8 @@ exports.isKakao = (req, res, next) => {
         intentId: req.body.intent.id,
         action: req.body.action.params.coffee_name,
         userId: req.body.userRequest.user.id,
+        // response: req.body.action.detailParams.coffee_name.value,
+        // amount: req.body.action.detailParams.CupCount.origin,
         text: req.body.userRequest.utterance
     };
 

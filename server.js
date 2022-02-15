@@ -4,7 +4,7 @@ const db = require("./models");
 const logger = require("morgan");
 const port = 3000;
 
-const indexRouter = require("./main/index");
+// const indexRouter = require("./main/index");
 
 db.sequelize
     .sync()
@@ -21,7 +21,9 @@ app.use(
     })
 );
 
-app.use("/", indexRouter);
+// Main Route
+app.use(require("./main"));
+// app.use("/", indexRouter);
 
 app.listen(port, () => {
     console.log(`Example skill server listening on ${port}!`);
