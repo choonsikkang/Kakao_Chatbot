@@ -1,9 +1,7 @@
 const { inspect } = require("util");
 const { basket } = require("../../models");
 
-exports.updateCoffee = async (req, res, next) => {
-    console.log(req.body);
-
+exports.updateCoffee = async (req, res) => {
     const update_basket = await basket
         .update(
             {
@@ -65,5 +63,4 @@ exports.updateCoffee = async (req, res, next) => {
     res.status(200).send(responseBody);
 
     console.log(`update_basket : ${inspect(update_basket)}`);
-    // next();
 };

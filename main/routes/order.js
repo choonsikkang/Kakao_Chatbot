@@ -1,14 +1,8 @@
 const { inspect } = require("util");
 const { basket } = require("../../models");
-// const { route } = require("../../assets/intent");
 
-exports.postCoffee = async (req, res, next) => {
-    const kakao = res.locals.kakao;
-
-    // console.log(kakao.action);
-    // console.log(req.body);
+exports.postCoffee = async (req, res) => {
     console.log("kakao log==================================");
-
     try {
         let box = await basket.findOrCreate({
             where: { name: req.body.action.detailParams.coffee_name.value },
@@ -79,45 +73,7 @@ exports.postCoffee = async (req, res, next) => {
         res.status(200).send(responseBody);
 
         console.log(`Coffee :${inspect(menu)}`);
-
-        // // let object = {};
-        // let array = [];
-        // let intentId = "";
-        // for (let i in route) {
-        //     // console.log(`${i}: ${route[i]}`);
-        //     // object[route[i]] = i;
-        //     array.push(route[i], i);
-        //     intentId += `${route[i]}: ${i}` + "\n";
-        //     // { route[i] : i }
-        //     // 이런식의 값으로 나오게 할 순 없을까?
-        // }
-        // console.log(intentId);
-        // console.log(array);
-
-        // 배열 방식
-        // let array = [];
-        // let intentId = "";
-        // for (let i in route) {
-        //     array.push(route[i], i);
-        //     intentId += `${route[i]}: ${i}` + "\n";
-        // }
-        // // console.log(intentId);
-        // console.log(array);
-
-        // let [title, sub] = array;
-        // const block = BLOCK && [title] && [sub];
-        // console.log(block);
-        // // BLOCK?.[title]?.[sub];
-
-        // // title, sub를 통해 routes에서 함수 추출(???)
-        // if (title && sub) {
-        //     console.log(`Title: ${title}, Sub: ${sub}`);
-        // }
-
-        // next();
     } catch (err) {
-        /* NOTE ER_DUP_ENTRY (unique key)에 대한 에러핸들링 구현해보기 */
-
         // 에러를 발생시킨다고 한다.
         // throw new Error("Some unexpected error, may also be thrown by a library or the runtime.");
         console.error(err);
